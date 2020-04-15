@@ -2,8 +2,16 @@ package com.yuezhiming.demo_one.controller;/**
  * Created by ASUSon 2020/4/12 17:59
  */
 
+import com.yuezhiming.demo_one.commons.TokenUtil;
+import com.yuezhiming.demo_one.service.IndexService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @program: demo_one
@@ -17,9 +25,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
+    @Autowired
+    IndexService indexService;
 
     @RequestMapping("/index")
     public String index(){
         return "index";
+    }
+
+    @RequestMapping("/getToken")
+    public String getToken(){
+        return TokenUtil.getToken();
+    }
+    @RequestMapping(value = "/addInfo", method = RequestMethod.POST)
+    public String addInfo(@RequestParam Map<String, Object> param, HttpServletRequest request){
+        String token = request.getHeader("token");
+        if(!TokenUtil.tokenExist(token)) throw new RuntimeException("不能重复提交");
+        return null;
+    }
+
+    @RequestMapping("test")
+    public String test(){
+        indexService = () -> "zhang";
+        return  null;
     }
 }
