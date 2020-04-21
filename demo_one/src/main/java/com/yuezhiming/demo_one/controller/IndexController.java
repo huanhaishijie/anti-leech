@@ -36,8 +36,7 @@ public class IndexController {
     RedisTokenUtil redisTokenUtil;
 
     @RequestMapping("/index")
-    public String index(Model model){
-        model.addAttribute("token", redisTokenUtil.getToken());
+    public String index(){
         return "index";
     }
 
