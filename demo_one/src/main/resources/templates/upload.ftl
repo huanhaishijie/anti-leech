@@ -6,11 +6,9 @@
 </head>
 <body>
 <div>
-    <form method="post" action="/addUser">
-        <input name="token" type="text" value="${token}">
-        <input name="username" type="text"/>
-        <input name="password" type="text"/>
-        <input type="submit">
+    <form method="post" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file"/>
+        <input type="submit"/>
     </form>
 </div>
 <#--<span>欢迎来到首页</span>-->
